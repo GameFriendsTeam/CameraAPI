@@ -16,6 +16,11 @@ on:
         required: false
         default: 'Новый релиз'
         type: string
+      publish_modrinth:
+        description: 'Залить на Modrinth?'
+        required: false
+        default: false
+        type: boolean
 
 jobs:
   build:
@@ -95,4 +100,18 @@ jobs:
           draft: false
           prerelease: false
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+
+      - name: Publish to Modrinth
+        if: github.event.inputs.publish_modrinth == 'true'
+        uses: Kir-Antipov/mc-publish@v3.3
+        with:
+          modrinth-id: ${{ secrets.MODRINTH_PROJECT_ID }}
+          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
+          files: build/libs/*.jar
+          name: CameraAPI v${{ github.event.inputs.version }}
+          version: ${{ github.event.inputs.version }}
+          version-type: release
+          changelog: ${{ github.event.inputs.release_notes }}
+          loaders: forge
+          game-versions: 1.20.1

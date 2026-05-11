@@ -16,7 +16,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 import ru.gmp.capi.api.CameraEntity;
-import ru.gmp.capi.api.Rotation;
+import ru.gmp.capi.api.CameraPosition;
 import ru.gmp.capi.mod.GameOverlayHandler;
 
 import java.util.UUID;
@@ -80,7 +80,7 @@ public class CameraAPI {
         enabled = !enabled;
     }
 
-    public static void setCameraPos(Rotation pos) {
+    public static void setCameraPos(CameraPosition pos) {
         camX = pos.x; camY = pos.y; camZ = pos.z;
         camYaw = pos.yaw; camPitch = pos.pitch;
 

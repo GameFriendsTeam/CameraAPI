@@ -2,7 +2,7 @@ package ru.gmp.capi.api;
 
 import net.minecraft.world.phys.Vec3;
 
-public class Rotation {
+public class CameraPosition {
     public double x;
     public double y;
     public double z;
@@ -10,7 +10,7 @@ public class Rotation {
     public float yaw;
     public float pitch;
 
-    public Rotation(double x, double y, double z, float yaw, float pitch) {
+    public CameraPosition(double x, double y, double z, float yaw, float pitch) {
         this.x = x;
         this.y = y;
         this.z = z;
@@ -22,12 +22,12 @@ public class Rotation {
         return new Vec3(x, y, z);
     }
 
-    public static Rotation fromVector(Vec3 vec) {
+    public static CameraPosition fromVector(Vec3 vec) {
         double x = vec.x;
         double y = vec.y;
         double z = vec.z;
 
-        return new Rotation(x, y, z, 0, 0);
+        return new CameraPosition(x, y, z, 0, 0);
     }
 
     public void normalize() {

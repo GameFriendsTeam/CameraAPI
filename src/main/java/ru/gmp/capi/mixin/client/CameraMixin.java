@@ -12,11 +12,6 @@ import ru.gmp.capi.CameraAPI;
 
 @Mixin(Camera.class)
 public class CameraMixin {
-
-    @Shadow private Entity entity;
-    @Shadow private float eyeHeightOld;
-    @Shadow private float eyeHeight;
-
     @Inject(method = "getFluidInCamera", at = @At("HEAD"), cancellable = true)
     public void onGetSubmersionType(CallbackInfoReturnable<FogType> cir) {
         if (CameraAPI.getCameraEnabled()) {

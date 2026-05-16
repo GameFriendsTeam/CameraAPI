@@ -40,21 +40,12 @@ public class CameraAPI {
     public CameraAPI() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        modEventBus.addListener(this::commonSetup);
+        //modEventBus.addListener(this::commonSetup);
 
         MinecraftForge.EVENT_BUS.register(this);
-        MinecraftForge.EVENT_BUS.register(new GameOverlayHandler());
+        //MinecraftForge.EVENT_BUS.register(new GameOverlayHandler());
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
-    }
-
-    private void commonSetup(final FMLCommonSetupEvent event) {
-    }
-
-
-    @SubscribeEvent
-    public void onServerStarting(ServerStartingEvent event) {
-        LOGGER.info("HELLO from server starting");
     }
 
     @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
@@ -64,10 +55,11 @@ public class CameraAPI {
         public static void onClientSetup(FMLClientSetupEvent event) {}
     }
 
-    public static void initCamera() {
-        if (selfCamera != null) return;
-        if (MC.level == null) return;
-        selfCamera = new CameraEntity(MC.level, new GameProfile(UUID.randomUUID(), "CAPI_Camera"));
+    public static boolean initCamera() {
+        if (selfCamera != null) return false;
+        if (MC.level == null) return false;
+        selfCamera = new CameraEntity(MC.level, new GameProfile(UUID.randomUUID(), "VirtualCamera"));
+        return true;
     }
 
     public static void toggleCamera() {

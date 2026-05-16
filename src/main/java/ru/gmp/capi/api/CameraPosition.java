@@ -3,12 +3,12 @@ package ru.gmp.capi.api;
 import net.minecraft.world.phys.Vec3;
 
 public class CameraPosition {
-    public double x;
-    public double y;
-    public double z;
+    public final double x;
+    public final double y;
+    public final double z;
 
-    public float yaw;
-    public float pitch;
+    public final float yaw;
+    public final float pitch;
 
     public CameraPosition(double x, double y, double z, float yaw, float pitch) {
         this.x = x;
@@ -28,17 +28,5 @@ public class CameraPosition {
         double z = vec.z;
 
         return new CameraPosition(x, y, z, 0, 0);
-    }
-
-    public void normalize() {
-        yaw = wrapDegrees(yaw);
-        pitch = Math.max(-90, Math.min(90, pitch));
-    }
-
-    private static float wrapDegrees(float angle) {
-        angle %= 360.0F;
-        if (angle >= 180.0F) angle -= 360.0F;
-        if (angle < -180.0F) angle += 360.0F;
-        return angle;
     }
 }
